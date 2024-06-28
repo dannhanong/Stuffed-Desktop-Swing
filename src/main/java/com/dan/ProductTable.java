@@ -544,6 +544,8 @@ public class ProductTable extends javax.swing.JFrame {
             loadProducts();
             JOptionPane.showMessageDialog(null, "Sản phẩm đã được xóa thành công!");
             resetData();
+            loadCartView();
+            loadProductsView();
         }
     }//GEN-LAST:event_jbtDeleteActionPerformed
 
@@ -554,10 +556,12 @@ public class ProductTable extends javax.swing.JFrame {
             product.setName(jtfName.getText());
             product.setDescription(jtfDescription.getText());
             product.setPrice(Integer.parseInt(jtfPrice.getText()));;
-            product.setQuantity(Integer.parseInt(jtfQuantity.getText()));;
+            product.setQuantity(Integer.parseInt(jtfQuantity.getText()));
             product.setImage(Files.readAllBytes(this.file.toPath()));
             ProductService.updateProduct(product);
             loadProducts();
+            loadCartView();
+            loadProductsView();
             JOptionPane.showMessageDialog(null, "Cập nhập sản phẩm thành công");
         } catch (Exception e) {
             // TODO: handle exception

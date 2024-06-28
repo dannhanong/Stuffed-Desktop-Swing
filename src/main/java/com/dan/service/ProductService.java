@@ -83,9 +83,15 @@ public class ProductService {
 
     public static void deleteProduct(String id) {
         String sql = "DELETE FROM products WHERE id = ?";
+        String sql2 = "DELETE FROM order_items WHERE product_id = ?";
 
-        try (Connection conn = DBUtils.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (
+            Connection conn = DBUtils.getConnection(); 
+            PreparedStatement stmt = conn.prepareStatement(sql); 
+            PreparedStatement stmt2 = conn.prepareStatement(sql2)) {
             stmt.setString(1, id);
+            stmt2.setString(1, id);
+            stmt2.executeUpdate();
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
